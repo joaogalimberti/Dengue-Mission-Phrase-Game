@@ -31,32 +31,6 @@
 
 ---
 
-## 🌟 Demonstração Interativa
-
-<details>
-<summary>🎬 <strong>Clique aqui para ver o gameplay em ação!</strong></summary>
-
-```
-🏃‍♂️ Personagem se movendo...    🦟 Mosquito voando...
-     ⬆️                           /|\
-   ⬅️ 🕴️ ➡️       vs            🦟   🦟
-     ⬇️                         \|/
-                                 🦟
-
-💨 SPRAY! 💨  ➡️  💀 Mosquito eliminado! ➡️  🎯 +2 pontos!
-```
-
-**Funcionalidades em Tempo Real:**
-- ✅ Movimentação fluida com setas do teclado
-- ✅ Sistema de spray repelente (Espaço)
-- ✅ Eliminação de focos de dengue
-- ✅ Sistema de pontuação dinâmico
-- ✅ Feedback visual e sonoro
-
-</details>
-
----
-
 ## 📊 Status do Projeto
 
 <div align="center">
@@ -68,10 +42,9 @@
 | 🦟 **IA dos Mosquitos** | ✅ Completo | ![100%](https://progress-bar.dev/100/?color=00ff00) |
 | 💨 **Sistema de Spray** | ✅ Completo | ![100%](https://progress-bar.dev/100/?color=00ff00) |
 | 🎯 **Sistema de Pontuação** | ✅ Completo | ![100%](https://progress-bar.dev/100/?color=00ff00) |
-| 🔊 **Efeitos Sonoros** | ✅ Completo | ![100%](https://progress-bar.dev/100/?color=00ff00) |
+| 🔊 **Efeitos Sonoros** | 🔄 Em Desenvolvimento | ![0%](https://progress-bar.dev/100/?color=00ff00) |
 | 📱 **Design Responsivo** | ✅ Completo | ![100%](https://progress-bar.dev/100/?color=00ff00) |
 | 🏆 **Sistema de Rankings** | 🔄 Em Desenvolvimento | ![75%](https://progress-bar.dev/75/?color=yellow) |
-| 🌐 **Multiplayer** | 📋 Planejado | ![0%](https://progress-bar.dev/0/?color=red) |
 
 </div>
 
@@ -127,30 +100,6 @@ graph TD
 </td>
 </tr>
 </table>
-
----
-
-## 👥 Público-Alvo
-
-<div align="center">
-
-```
-👶 9 anos ←→ 12 anos 🧒
-     |           |
-     └─────┬─────┘
-           |
-    📚 Ciclo II do EF
-           |
-    🏫 Escolas Públicas
-```
-
-**Características do Público:**
-- 🎮 Nativos digitais
-- 🌈 Aprendizado visual
-- 🎯 Atenção por gamificação
-- 👥 Interação social
-
-</div>
 
 ---
 
@@ -471,9 +420,7 @@ mindmap
 </div>
 
 **👨‍🎓 Desenvolvedor:** João Vitor Galimberti Contarato  
-**🏫 Instituição:** [Nome da Instituição]  
-**📅 Período:** [Semestre/Ano]  
-**👨‍🏫 Orientador:** [Nome do Professor]
+**🏫 Instituição:** Faculdade UCL
 
 ### 🎯 Competências Desenvolvidas
 
@@ -568,7 +515,7 @@ Contribuições fazem a comunidade open source um lugar incrível para aprender,
 - 🏆 Sistema de achievements
 - 🌐 Modo multiplayer
 - 📊 Analytics do jogo
-- 🎨 Novos personagens
+- 🎨 Novos personagens e cenários
 
 </td>
 <td width="33%">
@@ -582,46 +529,6 @@ Contribuições fazem a comunidade open source um lugar incrível para aprender,
 </td>
 </tr>
 </table>
-
-### 👥 Contribuidores
-
-<div align="center">
-
-Agradecemos a essas pessoas incríveis que contribuíram para este projeto:
-
-<a href="https://github.com/seu-usuario/missao-contra-dengue/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=seu-usuario/missao-contra-dengue" />
-</a>
-
-*Feito com [contrib.rocks](https://contrib.rocks).*
-
-</div>
-
----
-
-## 📄 Licença
-
-<div align="center">
-
-Este projeto está licenciado sob a **Licença MIT**.  
-Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-
-</div>
-
-### 📋 Resumo da Licença
-
-```
-✅ Uso comercial          ✅ Modificação          ✅ Distribuição
-✅ Uso privado           ✅ Fork do projeto      ❌ Responsabilidade
-```
-
----
-
-## 📞 Contato & Suporte
-
-<div align="center">
 
 ### 🤝 Vamos Conversar!
 
@@ -637,10 +544,10 @@ Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
   </a>
 </p>
 
-**📧 Email:** [seu-email@exemplo.com](mailto:seu-email@exemplo.com)  
-**🔗 LinkedIn:** [João Vitor Galimberti Contarato](https://linkedin.com/in/seu-perfil)  
-**🐙 GitHub:** [@seu-usuario](https://github.com/seu-usuario)  
-**🌐 Projeto:** [Missão Contra a Dengue](https://github.com/seu-usuario/missao-contra-dengue)
+**📧 Email:** [seu-email@exemplo.com](mailto:joaogalimberti@gmail.com)  
+**🔗 LinkedIn:** [João Vitor Galimberti Contarato](https://linkedin.com/in/joaogalimberti)  
+**🐙 GitHub:** [@seu-usuario](https://github.com/joaogalimberti)  
+**🌐 Projeto:** [Missão Contra a Dengue](https://github.com/joaogalimberti/dengue-mission)
 
 </div>
 
@@ -653,19 +560,19 @@ Encontrou um problema? Precisa de ajuda?
 <td width="33%">
 
 **🐛 Bug Report**
-[Criar Issue](https://github.com/seu-usuario/missao-contra-dengue/issues/new?template=bug_report.md)
+[Criar Issue](https://github.com/joaogalimberti/dengue-mission/issues/new?template=bug_report.md)
 
 </td>
 <td width="33%">
 
 **💡 Feature Request**
-[Sugerir Feature](https://github.com/seu-usuario/missao-contra-dengue/issues/new?template=feature_request.md)
+[Sugerir Feature](https://github.com/joaogalimberti/dengue-mission/issues/new?template=feature_request.md)
 
 </td>
 <td width="33%">
 
 **❓ Dúvidas**
-[Abrir Discussion](https://github.com/seu-usuario/missao-contra-dengue/discussions)
+[Abrir Discussion](https://github.com/joaogalimberti/dengue-mission/discussions)
 
 </td>
 </tr>
