@@ -51,13 +51,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       throw new Error('Keyboard input is not available in this scene.');
     }
     
-    // Espera um pouco para garantir que as animações foram carregadas
-    // Depois toca a animação de "parado"
-    scene.time.delayedCall(50, () => {
-      if (this.anims.exists('agent-idle')) {
-        this.play('agent-idle');
-      }
-    });
+    // Toca a animação de "parado" imediatamente para garantir que o sprite apareça
+    if (this.anims.exists('agent-idle')) {
+      this.play('agent-idle');
+    }
   }
   
   // Função que roda a cada frame para atualizar o movimento do jogador
