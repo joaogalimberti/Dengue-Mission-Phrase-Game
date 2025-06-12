@@ -51,10 +51,15 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       throw new Error('Keyboard input is not available in this scene.');
     }
     
-    // Toca a animação de "parado" imediatamente para garantir que o sprite apareça
-    if (this.anims.exists('agent-idle')) {
-      this.play('agent-idle');
-    }
+    // Toca a animação de "parado" imediatamente
+    // Usa um pequeno delay para garantir que as animações foram criadas
+    scene.time.delayedCall(100, () => {
+      if (this.anims.exists('agent-idle')) {
+        this.play('agent-idle');
+      } else {
+        console.warn('Animação agent-idle não encontrada');
+      }
+    });
   }
   
   // Função que roda a cada frame para atualizar o movimento do jogador
@@ -76,15 +81,17 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       // Move para a esquerda
       this.setVelocityX(-speed);
       this.setFlipX(true); // Espelha o sprite para virar para a esquerda
-      console.log('Tentando tocar agent-walk-side (esquerda)');
-      this.play('agent-walk-side', true); // Toca animação de andar lateral
+      if (this.anims.exists('agent-walk-side')) {
+        this.play('agent-walk-side', true); // Toca animação de andar lateral
+      }
       isMoving = true;
     } else if (this.cursors.right.isDown) {
       // Move para a direita
       this.setVelocityX(speed);
       this.setFlipX(false); // Sprite normal (virado para a direita)
-      console.log('Tentando tocar agent-walk-side (direita)');
-      this.play('agent-walk-side', true); // Toca animação de andar lateral
+      if (this.anims.exists('agent-walk-side')) {
+        this.play('agent-walk-side', true); // Toca animação de andar lateral
+      }
       isMoving = true;
     }
     
@@ -92,21 +99,24 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.cursors.up.isDown) {
       // Move para cima
       this.setVelocityY(-speed); // Negativo = para cima
-      console.log('Tentando tocar agent-walk-up');
-      this.play('agent-walk-up', true); // Toca animação de andar para cima
+      if (this.anims.exists('agent-walk-up')) {
+        this.play('agent-walk-up', true); // Toca animação de andar para cima
+      }
       isMoving = true;
     } else if (this.cursors.down.isDown) {
       // Move para baixo
       this.setVelocityY(speed);
-      console.log('Tentando tocar agent-walk-down');
-      this.play('agent-walk-down', true); // Toca animação de andar para baixo
+      if (this.anims.exists('agent-walk-down')) {
+        this.play('agent-walk-down', true); // Toca animação de andar para baixo
+      }
       isMoving = true;
     }
     
     // Se não está se movendo, toca a animação de "parado"
     if (!isMoving) {
-      console.log('Tentando tocar agent-idle');
-      this.play('agent-idle', true);
+      if (this.anims.exists('agent-idle')) {
+        this.play('agent-idle', true);
+      }
     }
     
     // Corrige movimento diagonal para manter velocidade constante

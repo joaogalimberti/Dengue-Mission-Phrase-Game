@@ -63,10 +63,7 @@ export const createMainScene = (config: MainSceneConfig) => {
       this.scene.launch('UIScene'); // Inicia a interface do usuário (placar, vida, etc)
       this.createSimpleBackground(); // Cria o fundo do jogo (grama)
       
-      // Criar as animações do personagem ANTES de criar o jogador
-      this.createAnimations();
-      
-      // Criar os elementos do jogo na ordem correta
+      // Configurar os elementos do jogo na ordem correta
       this.setupGroups(); // Organiza os objetos em grupos
       this.createBreedingSites(); // Coloca os focos de dengue no mapa
       
@@ -115,49 +112,6 @@ export const createMainScene = (config: MainSceneConfig) => {
       
       // Não começar criando partículas ainda
       this.sprayParticleManager.stop();
-    }
-
-    // === CRIAÇÃO DAS ANIMAÇÕES DO PERSONAGEM ===
-    // Define como o agente de saúde se move em cada direção
-    private createAnimations() {
-      console.log('Criando animações...');
-      
-      // Animação quando o agente está parado
-      this.anims.create({
-        key: 'agent-idle', // Nome da animação
-        frames: this.anims.generateFrameNumbers('front_agent', { start: 0, end: 3 }), // Quais imagens usar
-        frameRate: 4, // Velocidade da animação
-        repeat: -1 // Repetir infinitamente
-      });
-      console.log('Animação agent-idle criada');
-
-      // Animação andando para baixo (quando aperta seta para baixo)
-      this.anims.create({
-        key: 'agent-walk-down',
-        frames: this.anims.generateFrameNumbers('front_agent', { start: 0, end: 3 }),
-        frameRate: 8, // Mais rápido que o idle
-        repeat: -1
-      });
-      console.log('Animação agent-walk-down criada');
-
-      // Animação andando para cima (quando aperta seta para cima)
-      this.anims.create({
-        key: 'agent-walk-up',
-        frames: this.anims.generateFrameNumbers('back_agent', { start: 0, end: 3 }),
-        frameRate: 8,
-        repeat: -1
-      });
-      console.log('Animação agent-walk-up criada');
-
-      // Animação andando para os lados (esquerda e direita)
-      this.anims.create({
-        key: 'agent-walk-side',
-        frames: this.anims.generateFrameNumbers('agent', { start: 0, end: 3 }),
-        frameRate: 8,
-        repeat: -1
-      });
-      console.log('Animação agent-walk-side criada');
-      console.log('Todas as animações foram criadas!');
     }
 
     // === CRIAÇÃO DO FUNDO DO JOGO ===

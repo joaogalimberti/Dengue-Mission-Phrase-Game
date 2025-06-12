@@ -32,7 +32,7 @@ export const createBootScene = () => {
         frameHeight: 64
       });
 
-      // Carregamento da spritesheet do mosquito (removida a linha duplicada do image)
+      // Carregamento da spritesheet do mosquito
       this.load.spritesheet('mosquito', '/assets/mosquito1.png', {
         frameWidth: 32,
         frameHeight: 32
@@ -67,19 +67,54 @@ export const createBootScene = () => {
         progressBar.destroy();
         progressBox.destroy();
         loadingText.destroy();
-        
-        // Criar animações do mosquito
-        this.anims.create({
-          key: 'fly',
-          frames: this.anims.generateFrameNumbers('mosquito', { start: 0, end: 3 }),
-          frameRate: 8,
-          repeat: -1
-        });
       });
     }
 
     create() {
+      // Criar todas as animações AQUI, depois que todos os assets foram carregados
+      this.createAllAnimations();
+      
+      // Só depois iniciar a cena principal
       this.scene.start('MainScene');
+    }
+
+    createAllAnimations() {
+      // Animações do mosquito
+      this.anims.create({
+        key: 'fly',
+        frames: this.anims.generateFrameNumbers('mosquito', { start: 0, end: 3 }),
+        frameRate: 8,
+        repeat: -1
+      });
+
+      // Animações do agente
+      this.anims.create({
+        key: 'agent-idle',
+        frames: this.anims.generateFrameNumbers('front_agent', { start: 0, end: 3 }),
+        frameRate: 4,
+        repeat: -1
+      });
+
+      this.anims.create({
+        key: 'agent-walk-down',
+        frames: this.anims.generateFrameNumbers('front_agent', { start: 0, end: 3 }),
+        frameRate: 8,
+        repeat: -1
+      });
+
+      this.anims.create({
+        key: 'agent-walk-up',
+        frames: this.anims.generateFrameNumbers('back_agent', { start: 0, end: 3 }),
+        frameRate: 8,
+        repeat: -1
+      });
+
+      this.anims.create({
+        key: 'agent-walk-side',
+        frames: this.anims.generateFrameNumbers('agent', { start: 0, end: 3 }),
+        frameRate: 8,
+        repeat: -1
+      });
     }
   }
 
