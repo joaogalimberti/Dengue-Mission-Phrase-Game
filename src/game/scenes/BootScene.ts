@@ -12,6 +12,7 @@ export const createBootScene = () => {
       this.load.image('grass', '/assets/grass.png');
       this.load.image('heart', '/assets/heart.png');
       this.load.image('spray', '/assets/spray.png');
+      this.load.image('mosquito', '/assets/mosquito1.png');
       this.load.image('tire', '/assets/breeding_tire.png');
       this.load.image('waterContainer', '/assets/breeding_plant.png');
       this.load.image('plant', '/assets/breeding_plant.png');
@@ -32,7 +33,7 @@ export const createBootScene = () => {
         frameHeight: 64
       });
 
-      // Criar animação do mosquito - apenas como spritesheet
+      // Criar animação do mosquito
       this.load.spritesheet('mosquito', '/assets/mosquito1.png', {
         frameWidth: 32,
         frameHeight: 32
