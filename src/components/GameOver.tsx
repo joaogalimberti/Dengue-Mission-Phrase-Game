@@ -36,8 +36,8 @@ const GameOver: React.FC<GameOverProps> = ({ score, won, onPlayAgain, onBackToMe
         {/* Imagem que muda dependendo do resultado */}
         <img 
           src={won 
-            ? '/assets/missao_dengue_vitoria.webp'  // Imagem de vitória
-            : '/assets/missao_dengue_derrota.png'   // Imagem de derrota
+            ? 'assets/missao_dengue_vitoria.webp'  // Imagem de vitória
+            : 'assets/missao_dengue_derrota.png'   // Imagem de derrota
           } 
           alt={won ? "Vitória" : "Derrota"} // Texto alternativo para acessibilidade
           className="w-full h-48 object-cover rounded-lg mb-4" 

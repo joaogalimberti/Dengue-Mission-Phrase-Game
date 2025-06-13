@@ -8,32 +8,32 @@ export const createBootScene = () => {
 
     preload() {
       // Carregamento das imagens do jogo
-      // Agora usando caminhos absolutos que funcionam no Netlify
-      this.load.image('grass', '/assets/grass.png');
-      this.load.image('heart', '/assets/heart.png');
-      this.load.image('spray', '/assets/spray.png');
-      this.load.image('tire', '/assets/breeding_tire.png');
-      this.load.image('waterContainer', '/assets/breeding_plant.png');
-      this.load.image('plant', '/assets/breeding_plant.png');
+      // Usando caminhos relativos que funcionam tanto local quanto no Netlify
+      this.load.image('grass', 'assets/grass.png');
+      this.load.image('heart', 'assets/heart.png');
+      this.load.image('spray', 'assets/spray.png');
+      this.load.image('tire', 'assets/breeding_tire.png');
+      this.load.image('waterContainer', 'assets/breeding_plant.png');
+      this.load.image('plant', 'assets/breeding_plant.png');
 
       // Carregamento das spritesheets do agente
-      this.load.spritesheet('agent', '/assets/agent.png', {
+      this.load.spritesheet('agent', 'assets/agent.png', {
         frameWidth: 64,
         frameHeight: 64
       });
 
-      this.load.spritesheet('front_agent', '/assets/front_agent.png', {
+      this.load.spritesheet('front_agent', 'assets/front_agent.png', {
         frameWidth: 64,
         frameHeight: 64
       });
 
-      this.load.spritesheet('back_agent', '/assets/back_agent.png', {
+      this.load.spritesheet('back_agent', 'assets/back_agent.png', {
         frameWidth: 64,
         frameHeight: 64
       });
 
       // Carregamento da spritesheet do mosquito
-      this.load.spritesheet('mosquito', '/assets/mosquito1.png', {
+      this.load.spritesheet('mosquito', 'assets/mosquito1.png', {
         frameWidth: 32,
         frameHeight: 32
       });
@@ -68,9 +68,25 @@ export const createBootScene = () => {
         progressBox.destroy();
         loadingText.destroy();
       });
+
+      // Adicionar tratamento de erro para assets
+      this.load.on('loaderror', (file: any) => {
+        console.error('Erro ao carregar asset:', file.key, file.src);
+      });
     }
 
     create() {
+      // Verificar se todos os assets foram carregados antes de criar animações
+      const requiredAssets = ['mosquito', 'front_agent', 'back_agent', 'agent'];
+      const missingAssets = requiredAssets.filter(key => !this.textures.exists(key));
+      
+      if (missingAssets.length > 0) {
+        console.error('Assets não carregados:', missingAssets);
+        // Tentar recarregar assets em falta
+        this.reloadMissingAssets(missingAssets);
+        return;
+      }
+
       // Criar todas as animações AQUI, depois que todos os assets foram carregados
       this.createAllAnimations();
       
@@ -78,43 +94,89 @@ export const createBootScene = () => {
       this.scene.start('MainScene');
     }
 
+    reloadMissingAssets(missingAssets: string[]) {
+      console.log('Tentando recarregar assets:', missingAssets);
+      
+      missingAssets.forEach(asset => {
+        switch(asset) {
+          case 'mosquito':
+            this.load.spritesheet('mosquito', 'assets/mosquito1.png', {
+              frameWidth: 32,
+              frameHeight: 32
+            });
+            break;
+          case 'front_agent':
+            this.load.spritesheet('front_agent', 'assets/front_agent.png', {
+              frameWidth: 64,
+              frameHeight: 64
+            });
+            break;
+          case 'back_agent':
+            this.load.spritesheet('back_agent', 'assets/back_agent.png', {
+              frameWidth: 64,
+              frameHeight: 64
+            });
+            break;
+          case 'agent':
+            this.load.spritesheet('agent', 'assets/agent.png', {
+              frameWidth: 64,
+              frameHeight: 64
+            });
+            break;
+        }
+      });
+
+      this.load.start();
+      this.load.once('complete', () => {
+        this.createAllAnimations();
+        this.scene.start('MainScene');
+      });
+    }
+
     createAllAnimations() {
-      // Animações do mosquito
-      this.anims.create({
-        key: 'fly',
-        frames: this.anims.generateFrameNumbers('mosquito', { start: 0, end: 3 }),
-        frameRate: 8,
-        repeat: -1
-      });
+      // Verificar se as texturas existem antes de criar animações
+      if (this.textures.exists('mosquito')) {
+        this.anims.create({
+          key: 'fly',
+          frames: this.anims.generateFrameNumbers('mosquito', { start: 0, end: 3 }),
+          frameRate: 8,
+          repeat: -1
+        });
+      }
 
-      // Animações do agente
-      this.anims.create({
-        key: 'agent-idle',
-        frames: this.anims.generateFrameNumbers('front_agent', { start: 0, end: 3 }),
-        frameRate: 4,
-        repeat: -1
-      });
+      if (this.textures.exists('front_agent')) {
+        this.anims.create({
+          key: 'agent-idle',
+          frames: this.anims.generateFrameNumbers('front_agent', { start: 0, end: 3 }),
+          frameRate: 4,
+          repeat: -1
+        });
 
-      this.anims.create({
-        key: 'agent-walk-down',
-        frames: this.anims.generateFrameNumbers('front_agent', { start: 0, end: 3 }),
-        frameRate: 8,
-        repeat: -1
-      });
+        this.anims.create({
+          key: 'agent-walk-down',
+          frames: this.anims.generateFrameNumbers('front_agent', { start: 0, end: 3 }),
+          frameRate: 8,
+          repeat: -1
+        });
+      }
 
-      this.anims.create({
-        key: 'agent-walk-up',
-        frames: this.anims.generateFrameNumbers('back_agent', { start: 0, end: 3 }),
-        frameRate: 8,
-        repeat: -1
-      });
+      if (this.textures.exists('back_agent')) {
+        this.anims.create({
+          key: 'agent-walk-up',
+          frames: this.anims.generateFrameNumbers('back_agent', { start: 0, end: 3 }),
+          frameRate: 8,
+          repeat: -1
+        });
+      }
 
-      this.anims.create({
-        key: 'agent-walk-side',
-        frames: this.anims.generateFrameNumbers('agent', { start: 0, end: 3 }),
-        frameRate: 8,
-        repeat: -1
-      });
+      if (this.textures.exists('agent')) {
+        this.anims.create({
+          key: 'agent-walk-side',
+          frames: this.anims.generateFrameNumbers('agent', { start: 0, end: 3 }),
+          frameRate: 8,
+          repeat: -1
+        });
+      }
     }
   }
 
