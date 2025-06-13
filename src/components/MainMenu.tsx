@@ -56,7 +56,7 @@ const MainMenu: React.FC<MainMenuProps> = ({ onStartGame, onShowInstructions }) 
       {/* Seção da imagem principal */}
       <div className="mb-6">
         <img 
-          src="assets/first.webp" 
+          src="src/assets/first.webp" 
           alt="Missão Contra a Dengue" // Texto alternativo para acessibilidade
           className="w-full max-w-xs mx-auto rounded-lg shadow-md"
         />
