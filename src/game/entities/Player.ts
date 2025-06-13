@@ -23,22 +23,28 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     // Define o tamanho do personagem (20% do tamanho original)
     this.setScale(0.2);
     
+    // Garantir que o sprite seja visível
+    this.setVisible(true);
+    this.setActive(true);
+    
     // Ajusta o tamanho da área de colisão (hitbox)
     // Isso torna as colisões mais justas para o jogador
     const body = this.body as Phaser.Physics.Arcade.Body;
-    const hitboxScale = 0.6; // Hitbox será 60% do tamanho do sprite
-    
-    // Define o novo tamanho da hitbox
-    body.setSize(
-      this.width * hitboxScale,   // Largura da hitbox
-      this.height * hitboxScale   // Altura da hitbox
-    );
-    
-    // Centraliza a hitbox no meio do sprite
-    body.setOffset(
-      (this.width - body.width) / 2,    // Centralização horizontal
-      (this.height - body.height) / 2   // Centralização vertical
-    );
+    if (body) {
+      const hitboxScale = 0.6; // Hitbox será 60% do tamanho do sprite
+      
+      // Define o novo tamanho da hitbox
+      body.setSize(
+        this.width * hitboxScale,   // Largura da hitbox
+        this.height * hitboxScale   // Altura da hitbox
+      );
+      
+      // Centraliza a hitbox no meio do sprite
+      body.setOffset(
+        (this.width - body.width) / 2,    // Centralização horizontal
+        (this.height - body.height) / 2   // Centralização vertical
+      );
+    }
     
     // Configurações de física do jogador
     this.setCollideWorldBounds(true); // Não deixa sair da tela
@@ -51,13 +57,20 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       throw new Error('Keyboard input is not available in this scene.');
     }
     
+    // Verificar se a textura existe antes de tentar tocar animação
+    console.log('Player criado com textura:', texture);
+    console.log('Textura existe?', scene.textures.exists(texture));
+    
     // Toca a animação de "parado" imediatamente
     // Usa um pequeno delay para garantir que as animações foram criadas
     scene.time.delayedCall(100, () => {
-      if (this.anims.exists('agent-idle')) {
+      if (this.anims && this.anims.exists('agent-idle')) {
         this.play('agent-idle');
+        console.log('Animação agent-idle iniciada');
       } else {
         console.warn('Animação agent-idle não encontrada');
+        // Se não tem animação, pelo menos garantir que o sprite apareça
+        this.setFrame(0);
       }
     });
   }
@@ -81,7 +94,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       // Move para a esquerda
       this.setVelocityX(-speed);
       this.setFlipX(true); // Espelha o sprite para virar para a esquerda
-      if (this.anims.exists('agent-walk-side')) {
+      if (this.anims && this.anims.exists('agent-walk-side')) {
         this.play('agent-walk-side', true); // Toca animação de andar lateral
       }
       isMoving = true;
@@ -89,7 +102,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       // Move para a direita
       this.setVelocityX(speed);
       this.setFlipX(false); // Sprite normal (virado para a direita)
-      if (this.anims.exists('agent-walk-side')) {
+      if (this.anims && this.anims.exists('agent-walk-side')) {
         this.play('agent-walk-side', true); // Toca animação de andar lateral
       }
       isMoving = true;
@@ -99,14 +112,14 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.cursors.up.isDown) {
       // Move para cima
       this.setVelocityY(-speed); // Negativo = para cima
-      if (this.anims.exists('agent-walk-up')) {
+      if (this.anims && this.anims.exists('agent-walk-up')) {
         this.play('agent-walk-up', true); // Toca animação de andar para cima
       }
       isMoving = true;
     } else if (this.cursors.down.isDown) {
       // Move para baixo
       this.setVelocityY(speed);
-      if (this.anims.exists('agent-walk-down')) {
+      if (this.anims && this.anims.exists('agent-walk-down')) {
         this.play('agent-walk-down', true); // Toca animação de andar para baixo
       }
       isMoving = true;
@@ -114,7 +127,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     
     // Se não está se movendo, toca a animação de "parado"
     if (!isMoving) {
-      if (this.anims.exists('agent-idle')) {
+      if (this.anims && this.anims.exists('agent-idle')) {
         this.play('agent-idle', true);
       }
     }

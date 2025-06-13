@@ -67,11 +67,17 @@ export const createBootScene = () => {
         progressBar.destroy();
         progressBox.destroy();
         loadingText.destroy();
+        console.log('Todos os assets carregados com sucesso!');
       });
 
       // Adicionar tratamento de erro para assets
       this.load.on('loaderror', (file: any) => {
         console.error('Erro ao carregar asset:', file.key, file.src);
+      });
+
+      // Log de cada asset carregado
+      this.load.on('filecomplete', (key: string) => {
+        console.log('Asset carregado:', key);
       });
     }
 
@@ -87,6 +93,8 @@ export const createBootScene = () => {
         return;
       }
 
+      console.log('Todos os assets necessários estão carregados!');
+      
       // Criar todas as animações AQUI, depois que todos os assets foram carregados
       this.createAllAnimations();
       
@@ -134,17 +142,23 @@ export const createBootScene = () => {
     }
 
     createAllAnimations() {
+      console.log('Criando animações...');
+      
       // Verificar se as texturas existem antes de criar animações
       if (this.textures.exists('mosquito')) {
+        console.log('Criando animação fly para mosquito');
         this.anims.create({
           key: 'fly',
           frames: this.anims.generateFrameNumbers('mosquito', { start: 0, end: 3 }),
           frameRate: 8,
           repeat: -1
         });
+      } else {
+        console.error('Textura mosquito não encontrada!');
       }
 
       if (this.textures.exists('front_agent')) {
+        console.log('Criando animações para front_agent');
         this.anims.create({
           key: 'agent-idle',
           frames: this.anims.generateFrameNumbers('front_agent', { start: 0, end: 3 }),
@@ -158,25 +172,35 @@ export const createBootScene = () => {
           frameRate: 8,
           repeat: -1
         });
+      } else {
+        console.error('Textura front_agent não encontrada!');
       }
 
       if (this.textures.exists('back_agent')) {
+        console.log('Criando animação para back_agent');
         this.anims.create({
           key: 'agent-walk-up',
           frames: this.anims.generateFrameNumbers('back_agent', { start: 0, end: 3 }),
           frameRate: 8,
           repeat: -1
         });
+      } else {
+        console.error('Textura back_agent não encontrada!');
       }
 
       if (this.textures.exists('agent')) {
+        console.log('Criando animação para agent');
         this.anims.create({
           key: 'agent-walk-side',
           frames: this.anims.generateFrameNumbers('agent', { start: 0, end: 3 }),
           frameRate: 8,
           repeat: -1
         });
+      } else {
+        console.error('Textura agent não encontrada!');
       }
+
+      console.log('Animações criadas com sucesso!');
     }
   }
 

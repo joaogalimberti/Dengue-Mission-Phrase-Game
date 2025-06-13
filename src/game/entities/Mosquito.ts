@@ -22,7 +22,7 @@ export class Mosquito extends Phaser.Physics.Arcade.Sprite {
   // Construtor: função que roda quando um novo mosquito é criado
   constructor(scene: Phaser.Scene, x: number, y: number, texture: string, player: Player) {
     // Chama o construtor da classe pai com posição e imagem
-    super(scene, x, y, texture);
+    super(scene, x, y, texture, 0);
     
     // Adiciona o mosquito à cena para aparecer na tela
     scene.add.existing(this);
@@ -33,9 +33,17 @@ export class Mosquito extends Phaser.Physics.Arcade.Sprite {
     // Guarda a referência do jogador para poder perseguir
     this.player = player;
     
+    // Garantir que o sprite seja visível
+    this.setVisible(true);
+    this.setActive(true);
+    
     // Configura a física do mosquito
     this.setCollideWorldBounds(true); // Não deixa sair da tela
     this.setScale(0.1);               // Define tamanho (10% do original)
+    
+    // Verificar se a textura existe
+    console.log('Mosquito criado com textura:', texture);
+    console.log('Textura existe?', scene.textures.exists(texture));
     
     // Define uma velocidade inicial aleatória
     this.setRandomVelocity();
@@ -55,8 +63,15 @@ export class Mosquito extends Phaser.Physics.Arcade.Sprite {
   // Função que inicia a animação de voar do mosquito
   startAnimation() {
     // Só anima se estiver vivo, não tiver picado e a animação existir
-    if (this.scene && !this.isDying && !this.hasBitten && this.anims.exists('fly')) {
-      this.anims.play('fly', true); // Toca a animação 'fly'
+    if (this.scene && !this.isDying && !this.hasBitten) {
+      if (this.anims && this.anims.exists('fly')) {
+        this.anims.play('fly', true); // Toca a animação 'fly'
+        console.log('Animação fly iniciada para mosquito');
+      } else {
+        console.warn('Animação fly não encontrada para mosquito');
+        // Se não tem animação, pelo menos garantir que o sprite apareça
+        this.setFrame(0);
+      }
     }
   }
   
@@ -111,7 +126,9 @@ export class Mosquito extends Phaser.Physics.Arcade.Sprite {
     this.setVelocity(0, 0);
     
     // Destroi o timer de mudança de direção
-    this.moveTimer.destroy();
+    if (this.moveTimer) {
+      this.moveTimer.destroy();
+    }
     
     // Muda a cor para rosa/magenta para mostrar que picou
     this.setTint(0xFF00FF);
@@ -143,7 +160,9 @@ export class Mosquito extends Phaser.Physics.Arcade.Sprite {
     this.setVelocity(0, 0);
     
     // Destroi o timer de mudança de direção
-    this.moveTimer.destroy();
+    if (this.moveTimer) {
+      this.moveTimer.destroy();
+    }
     
     // Muda a cor para cinza escuro
     this.setTint(0x666666);
