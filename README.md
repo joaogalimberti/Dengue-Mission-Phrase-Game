@@ -533,20 +533,20 @@ Contribuições fazem a comunidade open source um lugar incrível para aprender,
 ### 🤝 Vamos Conversar!
 
 <p>
-  <a href="mailto:seu-email@exemplo.com">
+  <a href="mailto:joaogalimberti@gmail.com">
     <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white">
   </a>
-  <a href="https://linkedin.com/in/seu-perfil">
+  <a href="https://linkedin.com/in/joaogalimberti">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white">
   </a>
-  <a href="https://github.com/seu-usuario">
+  <a href="https://github.com/joaogalimberti">
     <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
   </a>
 </p>
 
-**📧 Email:** [seu-email@exemplo.com](mailto:joaogalimberti@gmail.com)  
+**📧 Email:** [joaogalimberti@gmail.com](mailto:joaogalimberti@gmail.com)  
 **🔗 LinkedIn:** [João Vitor Galimberti Contarato](https://linkedin.com/in/joaogalimberti)  
-**🐙 GitHub:** [@seu-usuario](https://github.com/joaogalimberti)  
+**🐙 GitHub:** [@joaogalimberti](https://github.com/joaogalimberti)  
 **🌐 Projeto:** [Missão Contra a Dengue](https://github.com/joaogalimberti/dengue-mission)
 
 </div>
